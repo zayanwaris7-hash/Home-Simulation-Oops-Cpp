@@ -33,17 +33,45 @@ The project leverages a decoupled, cohesive object structure designed to maximiz
 
 To build and run this simulation context locally, ensure you have a standard modern C++ compiler supporting **C++11 or higher** (such as `gcc`, `clang`, or MSVC).
 
-### Manual Compilation Strategy
-Open your terminal inside the root project directory containing the `.cpp` and `.h` source files, then execute the following instruction:
+---
+
+## ⚙️ How to Build & Run (Windows)
+
+### 1. Install dependencies
+Make sure you have installed:
+- CMake
+- MinGW (GCC compiler)
+- Git
+- VS Code (optional)
+
+---
+
+### 2. Clone the repository
 
 ```bash
-g++ -std=c++11 main.cpp Home.cpp Automation.cpp EnergyLog.cpp UserAuthentication.cpp -o NexusHub
-Initial Runtime Security Key
-Upon initial launch, the system requires safety clearance to establish runtime visibility over the control matrices. Use the default bootstrap properties:
+git clone https://github.com/zayanwaris7-hash/Home-Simulation-Oops-Cpp.git
+cd Home-Simulation-Oops-Cpp
+```
 
-Default Username: admin
+### 3. Create build folder
+```bash
+mkdir build
+cd build
+```
 
-Default Password: password123
+### 4. Generate build files using CMake
+```bash
+cmake .. -G "MinGW Makefiles"
+```
+
+### 5. Compile the project
+```bash
+cmake --build .
+```
+
+### 6. Run the program
+```bash
+./Home-Simulation-Oops-Cpp.exe
 ```
 ---
 ## 💻 Operation Guide
