@@ -23,19 +23,19 @@ public:
     SmartAppliance() : powerRating(0.0), runMode("stop") {}
     SmartAppliance(string a, string b, string c, int d, string e, float f, string g)
         : SmartDevice(a, b, c, d, e), powerRating(f), runMode(g) {}
-    void toggle()override
+    void toggle() override
     {
         if (isOn)
         {
             isOn = false;
             runMode="stop";
-            cout << "Thermostat | Name:" << name << " | is now Off." << endl;
+            cout << "Name:" << name << " | is now Off." << endl;
         }
         else
         {
             isOn = true;
             runMode="start";
-            cout << "Thermostat | Name:" << name << " | is now On." << endl;
+            cout << " Name:" << name << " | is now On." << endl;
         }
     }
     string getStatus()override
@@ -48,6 +48,7 @@ public:
         {
             cout << "Restarting device: " << name << " (ID: " << deviceid << ")..." << endl;
             isOn = false;
+            runMode= "stop";
             cout << "[STATUS] Power cut. Device is offline." << endl;
             Sleep(3000);
             isOn = true;
@@ -58,17 +59,19 @@ public:
             cout<<"...."<<endl;
             cout<<"...."<<endl;
             Sleep(3000);
+            runMode= "start";
             isOn=true;
             cout <<"[STATUS] Device booted back online." << endl;
         }
     }
     void getReport()override
     {
+        string m=getStatus();
         cout << "-----Smart Ligth------" << endl;
         cout << "Id : " << deviceid << endl;
         cout << "Name : " << name << endl;
         cout << "Location : " << location << endl;
-        cout << "IsOn : " << (isOn ? "Yes" : "No") << endl;
+        cout << "Status : " << m << endl;
         cout << "FirWirmVersion : " << firmWareVersion << endl;
         cout << "Power Rating : " << powerRating << endl;
         cout << "Run Mode : " << runMode << endl;
@@ -78,15 +81,15 @@ public:
         deviceid=a;
         cout << endl;
 
-        cout << "Enter Name of ThermoStat : ";
+        cout << "Enter Name of Smart Appliance : ";
         cin >> name;
         cout << endl;
 
-        cout << "Enter Location of ThermoStat : ";
+        cout << "Enter Location of Smart Appliance : ";
         cin >> location;
         cout << endl;
 
-        cout << "Enter FirmWare Version of ThermoStat : ";
+        cout << "Enter FirmWare Version of Smart Appliance : ";
         cin >> firmWareVersion;
         cout << endl;
         while (true) 

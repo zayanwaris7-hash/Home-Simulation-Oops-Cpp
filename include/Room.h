@@ -57,30 +57,33 @@ public:
         }
         return false;
     }
-    void AppliancesMenu()
+    SmartAppliance* AppliancesMenu()
     {
+        SmartAppliance* newDevice=NULL;
         int choice = 0;
         cout << "\n========================================" << endl;
         cout << "   ADD SMART APPLIANCES TO ROOM: " << roomName << endl;
         cout << "========================================" << endl;
         cout << " 1. Smart Lock\n2. Smart Speaker\n3. Back " << endl;
         cout << "Choice (1-3): ";
-        while (cin.fail() || choice < 1 || choice > 5)
+        cin>>choice;
+        while (cin.fail() || choice < 1 || choice > 3)
         {
-            cout << "Invalid selection! Enter 1-4: ";
+            cout << "Invalid selection! Enter 1-3: ";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cin >> choice;
         }
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        if (choice == 3)
-            addDevice();
-        SmartAppliance *newDevice;
+        //cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        //if (choice == 3)
+         //   addDevice();
         if (choice == 1)
             newDevice = new SmartLock();
         else if (choice == 2)
             newDevice = new SmartSpeaker();
-        if (newDevice != NULL)
+        else if(choice==3)
+              return newDevice;
+        /*if (newDevice != NULL)
         {
             string id;
             do
@@ -93,7 +96,8 @@ public:
             newDevice->AddInfo(id);
             ApplianceList.push_back(newDevice);
             cout << "[SUCCESS] '" << newDevice->getName() << "' added to " << roomName << endl;
-        }
+        }*/
+            return newDevice;
     }
     void addDevice()
     {
@@ -103,6 +107,7 @@ public:
         cout << "========================================" << endl;
         cout << "1. Thermostat\n2. Security Camera\n3. Smart Ligth\n4. Smart Appliances Menu\n5. Cancel" << endl;
         cout << "Choice (1-5): ";
+        cin>>choice;
         while (cin.fail() || choice < 1 || choice > 5)
         {
             cout << "Invalid selection! Enter 1-4: ";
@@ -129,7 +134,8 @@ public:
                 break;
             }
         }
-        SmartDevice *newDevice;
+        SmartDevice *newDevice = NULL;
+        SmartAppliance *newApp = NULL;
         if (choice == 1)
             newDevice = new Thermostat();
         else if (choice == 2)
@@ -137,13 +143,27 @@ public:
         else if (choice == 3)
             newDevice = new SmartLigth();
         else if (choice == 4){
-            AppliancesMenu();return;}
+            newApp=AppliancesMenu();
+        }
         if (newDevice != NULL)
         {
             newDevice->AddInfo(cleanID);
             deviceList.push_back(newDevice);
             cout << "[SUCCESS] '" << newDevice->getName() << "' added to " << roomName << endl;
         }
+        else if(newApp != NULL){
+            string id;
+            do
+            {
+                cout << "Enter Id Of Device | Name : " << newApp->getName() << " | :" << endl;
+                cin >> id;
+                if (doesIdExistAppliancesList(id))
+                    cout << "Id Already Exsist ! Try Again!" << endl;
+            } while (doesIdExistAppliancesList(id));
+            newApp->AddInfo(id);
+            ApplianceList.push_back(newApp);
+            cout << "[SUCCESS] '" << newApp->getName() << "' added to " << roomName << endl;
+        } else{ cout<<"Something Wrong "; return;}
     }
     void removeDevice(const string &targetID)
     {

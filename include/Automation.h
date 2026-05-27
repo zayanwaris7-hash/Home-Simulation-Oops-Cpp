@@ -33,8 +33,8 @@ public:
     Automation() : ruleID("RULE000"), triggerCondition("None"), triggerTime("ANY"), isActive(false) {}
 
     
-    Automation(string id, string condition, string time) 
-    : ruleID(id), triggerCondition(condition), triggerTime(time), isActive(isActive) {}
+    Automation(string id, string condition, string time,bool is) 
+    : ruleID(id), triggerCondition(condition), triggerTime(time), isActive(is) {}
 
     void activate() {
         isActive = true;

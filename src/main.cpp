@@ -7,6 +7,8 @@
 #include <vector>
 #include <limits>
 
+
+
 using namespace std;
 
 void clearInputStream()
@@ -248,7 +250,11 @@ int main()
 
                                     if (c == 1) A[idx - 1]->toggle();
                                     else if (c == 2) A[idx - 1]->restart();
-                                    else if (c == 3) A[idx - 1]->getStatus();
+                                    else if (c == 3) {
+                                       string msg= A[idx - 1]->getStatus();
+                                       cout<<"[STATUS] "<<msg<<endl;
+
+                                    }
                                     else if (c == 4) A[idx - 1]->getReport();
                                     else if (c == 5) A[idx - 1]->startCycle();
 
@@ -261,7 +267,8 @@ int main()
                 }
                 else if (roomAction == 1)
                 {
-                    activeRoom->addDevice();
+
+                    activeRoom->Room::addDevice();
                     break; 
                 }
                 else if (roomAction == 2)
